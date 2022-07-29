@@ -5,7 +5,7 @@
   <a href="https://git.icd-vietnam.com/icd-vietnam/icdvn-internal-system">
     <img src="public/dist/img/logo.svg" alt="Logo" width="160" height="160">
   </a>
-  <h3 align="center">ICD INTERNAL SYSTEM</h3>
+  <h3 align="center">MULTIPLE STORES SYSTEM</h3>
   <p align="center">
     <a href="https://git.icd-vietnam.com/icd-vietnam/icdvn-internal-system/-/blob/integrate/README.md"><strong>Explore the docs »</strong></a>
     <br />
@@ -41,11 +41,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<div id="about-the-project"></div>
-
-[[ICD Internal System]]()
-
-This source code is used to build the management tool for ICD Viet Nam
 
 ### Built With
 <div id="built-with"></div>
@@ -75,31 +70,10 @@ To get a local copy up and running follow these simple example steps.
 ### Installation
 <div id="installation"></div>
 
-1. Clone the repo
-   ```sh
-   git clone https://git.icd-vietnam.com/icd-vietnam/icdvn-internal-system
-   ```
-2. Open git bash and cd to project
-   ```sh
-   cd icdvn-internal-system
-   ```
-3. Create .env file on root folder
-4. Update your environment variables in `.env` (Copy from .env.example file)<br>
-   ```sh
-    ICD_APP_HOST=
-    ICD_APP_PORT=
-
-    MYSQL_DB=
-    MYSQL_HOST=
-    MYSQL_PORT=
-    MYSQL_USER=
-    MYSQL_PASSWORD=
-    ...
-   ```
-5. Install node modules
+1. Install node modules
    ```sh
     npm install
-6. Running the app
+2. Running the app
    ```sh
     # Development mode
     npm run start
