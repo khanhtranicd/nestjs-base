@@ -1,0 +1,87 @@
+body {
+    background-color: #ed960b !important;
+    font-family: Play;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
+.login-page {
+    background-color: #ed960b;
+    min-width: 1024px;
+}
+
+ion-icon {
+    font-size: 24px;
+    color: #ed960b;
+}
+
+.choose-language ion-icon {
+    vertical-align: bottom;
+}
+
+.choose-language span.active {
+    color: #ed960b;
+}
+.choose-language span.inactive{
+    color: #808080;
+}
+.login-box form {
+    width: 350px;
+}
+
+.login-box legend {
+    font-size: 34px;
+    letter-spacing: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.66;
+    letter-spacing: normal;
+    text-align: center;
+    color: #e98f38;
+}
+
+.login-box, .register-box {
+    background: #fff;
+    padding: 26px 31px;
+    border-radius: 20px;
+    width: 1000px !important;
+}
+
+.login-box form .form-group {
+    width: 350px;
+}
+
+.login-box .input-group-text {
+    width: 50px;
+    background: none;
+}
+
+.login-box .input-group-text img {
+    margin: 0 auto;
+}
+
+.login-box button[type=submit] {
+    height: 48px;
+    border-radius: 5px;
+    background-color: #ed960b;
+    color: #ffffff;
+}
+
+.custom-switch label {
+    font-size: 16px;
+    font-weight: normal !important;
+    font-stretch: normal;
+    font-style: normal;
+    color: #333;
+}
+.custom-control-input:checked~.custom-control-label::before{
+    border-color: #ed960b;
+    background-color: #ed960b;
+}
+
+.choose-language > a {
+    cursor: pointer;
+}

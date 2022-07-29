@@ -1,0 +1,42 @@
+{{#> admin.layout title=title }}
+  {{#*inline "style"}}
+    <link rel="stylesheet" href="/dist/css/common.css">
+    <link rel="stylesheet" href="/dist/css/master-registration.css">
+  {{/inline}}
+  {{#*inline "content"}}
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col d-flex justify-content-between align-items-center">
+            <h4 class="m-0 d-flex h4">
+              <ion-icon src="dist/icons/configuration.svg"></ion-icon>
+              <span class="ml-2">{{title}}</span>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <ul class="master__list p-0 m-0"> 
+              <li class="master__item d-flex">
+                <a href="{{routes 'MainMaster'}}/1">
+                  <ion-icon class="master__item__icon" src="/dist/icons/register.svg" size="small"></ion-icon>
+                  {{ master.position }}
+                </a>
+              </li>
+              <li class="master__item d-flex">
+                <a href="{{routes 'MainMaster'}}/2">
+                  <ion-icon class="master__item__icon" src="/dist/icons/bank.svg" size="small"></ion-icon>
+                  {{ master.bank }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/inline}}
+{{/admin.layout}}

@@ -1,0 +1,220 @@
+{{#> admin.layout title=title }}
+  {{#*inline "style"}}
+    <link rel="stylesheet" href="/dist/css/common.css">
+    <link rel="stylesheet" href="/dist/css/registration-confirm.css">
+  {{/inline}}
+  {{#*inline "content"}}
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col d-flex justify-content-between align-items-center">
+            <h4 class="m-0 d-flex h4">
+              <ion-icon name="search-outline"></ion-icon>
+              <span class="ml-2">{{ title }}</span></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <form id="user_registration_form" method="post">
+              <input hidden name="id" value="{{ registrationData.id }}" />
+              <input hidden name="status" value="{{ registrationData.status }}" />
+              <input hidden name="family_name_vn" value="{{ registrationData.family_name_vn }}" />
+              <input hidden name="middle_name_vn" value="{{ registrationData.middle_name_vn }}" />
+              <input hidden name="first_name_vn" value="{{ registrationData.first_name_vn }}" />
+              <input hidden name="family_name_en" value="{{ registrationData.family_name_en }}" />
+              <input hidden name="middle_name_en" value="{{ registrationData.middle_name_en }}" />
+              <input hidden name="first_name_en" value="{{ registrationData.first_name_en }}" />
+              <input hidden name="gender" value="{{ registrationData.gender }}" />
+              <input hidden name="birthday" value="{{ registrationData.birthday }}" />
+              <input hidden name="address" value="{{ registrationData.address }}" />
+              <input hidden name="cmnd" value="{{ registrationData.cmnd }}" />
+              <input hidden name="issue_place" value="{{ registrationData.issue_place }}" />
+              <input hidden name="phone_number" value="{{ registrationData.phone_number }}" />
+              <input hidden name="email" value="{{ registrationData.email }}" />
+              <input hidden name="tax_code" value="{{ registrationData.tax_code }}" />
+              <input hidden name="bank_name" value="{{ registrationData.bank_name }}" />
+              <input hidden name="account_number" value="{{ registrationData.account_number }}" />
+              <input hidden name="social_insurance_number" value="{{ registrationData.social_insurance_number }}" />
+              <input hidden name="position" value="{{ registrationData.position }}" />
+              <input hidden name="memo" value="{{ registrationData.memo }}" />
+              <table class="table table-bordered table-registration-confirm">
+                <thead>
+                <tr>
+                  <th class="font-weight-bold w-25">{{ langCommon.label.status }}</th>
+                  <th colspan="3" class="font-weight-light">{{ registrationData.statusToString }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td class="font-weight-bold">Vietnamese</td>
+                  <td><span class="font-weight-bold">{{ langCommon.label.familyNameVn }}</span> <br/> {{ registrationData.family_name_vn }}</td>
+                  {{#if registrationData.middle_name_vn }}
+                    <td><span class="font-weight-bold">{{ langCommon.label.middleNameVn }}</span> <br/> {{ registrationData.middle_name_vn }}</td>
+                  {{/if}}
+                  <td><span class="font-weight-bold">{{ langCommon.label.firstNameVn }}</span> <br/> {{ registrationData.first_name_vn }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">English</td>
+                  <td><span class="font-weight-bold">{{ langCommon.label.familyNameEn }}</span> <br/> {{ registrationData.family_name_en }}</td>
+                  {{#if registrationData.middle_name_en }}
+                    <td><span class="font-weight-bold">{{ langCommon.label.middleNameEn }}</span> <br/> {{ registrationData.middle_name_en }}</td>
+                  {{/if}}
+                  <td><span class="font-weight-bold">{{ langCommon.label.firstNameEn }}</span> <br/> {{ registrationData.first_name_en }}</td>
+                </tr>
+                {{#if registrationData.gender }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.gender }}</td>
+                    <td colspan="3">{{ registrationData.genderToString }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.race }}
+                  <input hidden name="race" value="{{ registrationData.race }}" />
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.race }}</td>
+                    <td colspan="3">{{ registrationData.race }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.birthday }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.birthday }}</td>
+                    <td colspan="3">{{ registrationData.birthday }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.address }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.address }}</td>
+                    <td colspan="3">{{ registrationData.address }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.cmnd }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.citizenIdentityCard }}</td>
+                    <td colspan="3">{{ registrationData.cmnd }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.issue_day }}
+                  <input hidden name="issue_day" value="{{ registrationData.issue_day }}" />
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.issueDay }}</td>
+                    <td colspan="3">{{ registrationData.issue_day }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.issue_place }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.issuePlace }}</td>
+                    <td colspan="3">{{ registrationData.issue_place }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.phone_number }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.phoneNumber }}</td>
+                    <td colspan="3">{{ registrationData.phone_number }}</td>
+                  </tr>
+                {{/if}}
+                <tr>
+                  <td class="font-weight-bold">{{ langCommon.label.email }}</td>
+                  <td colspan="3">{{ registrationData.email }}</td>
+                </tr>
+                {{#if registrationData.tax_code }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.taxCode }}</td>
+                    <td colspan="3">{{ registrationData.tax_code }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.bank_name }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.bankName }}</td>
+                    <td colspan="3">{{ registrationData.bank_name }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.account_number }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.accountNumber }}</td>
+                    <td colspan="3">{{ registrationData.account_number }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.social_insurance_number }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.socialInsuranceNumber }}</td>
+                    <td colspan="3">{{ registrationData.social_insurance_number }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.use_period_start }}
+                  <input hidden name="use_period_start" value="{{ registrationData.use_period_start }}" />
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.usePeriodStart }}</td>
+                    <td colspan="3">{{ registrationData.use_period_start }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.use_period_end }}
+                  <input hidden name="use_period_end" value="{{ registrationData.use_period_end }}" />
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.usePeriodEnd }}</td>
+                    <td colspan="3">{{ registrationData.use_period_end }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.position }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.position }}</td>
+                    <td colspan="3">{{ registrationData.positionToString }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.dependents }}
+                  <input hidden name="dependents" value="{{ registrationData.dependents }}" />
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.dependents }}</td>
+                    <td colspan="3">{{ registrationData.dependents }}</td>
+                  </tr>
+                {{/if}}
+                {{#if registrationData.memo }}
+                  <tr>
+                    <td class="font-weight-bold">{{ langCommon.label.memo }}</td>
+                    <td colspan="3">{{ registrationData.memo }}</td>
+                  </tr>
+                {{/if}}
+                </tbody>
+              </table>
+              <button type="submit" class="btn btn-style-1 mt-5">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                <span class="ml-2">{{ langCommon.btn.confirm }}</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/inline}}
+  {{#*inline "script"}}
+    <script>
+      $(function () {
+        $('#user_registration_form').validate({
+          submitHandler: function(form, event) {
+            event.preventDefault();
+            let payload = {}
+            const data = new FormData(form);
+            for (const [name,value] of data) {
+              payload[name] = value
+            }
+
+            const url = "{{ registrationData.id }}" ? "{{routes 'EmployeeUpdate'}}" : "{{routes 'EmployeeRegistration'}}"; 
+            $.ajax({ url, type: 'POST', data: payload })
+              .done(res => (location.href = "{{routes 'EmployeeList'}}"))
+              .fail(err => {
+                const { message } = err.responseJSON || {};
+                $(document).Toasts('create', {
+                    class: 'bg-danger',
+                    title: "{{ langCommon.toast.addTitle }}",
+                    body: message || "{{ langCommon.toast.fail }}",
+                    autohide: true,
+                  })
+              })
+          }
+        });
+      })
+    </script>
+  {{/inline}}
+{{/admin.layout}}

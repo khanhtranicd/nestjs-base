@@ -1,0 +1,19 @@
+{
+  "validationMsg": {
+    "password": {
+      "required": "Password is required",
+      "invalid_format": "Use 8 or more characters with a mix of letters, numbers & symbols"
+    },
+    "email": {
+      "invalid": "You have entered an invalid email",
+      "required": "Email address is required"
+    },
+    "login_fail": "You have entered an invalid e-mail or password"
+  },
+  "label": {
+    "rememberMe": "Remember me"
+  },
+  "button": {
+    "login": "Login"
+  }
+}

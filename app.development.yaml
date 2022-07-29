@@ -1,0 +1,40 @@
+# service: dogrun-backend
+
+# Standard environment
+# https://cloud.google.com/appengine/docs/standard/nodejs/configuring-your-app-with-app-yaml
+runtime: nodejs16
+env: standard
+
+# Auto scaling and resources configuration
+automatic_scaling:
+  target_cpu_utilization: 0.75
+  min_idle_instances: 0
+  max_idle_instances: 0
+  max_concurrent_requests: 80
+
+resources:
+  cpu: 1
+  memory_gb: 2
+  disk_size_gb: 10
+
+handlers:
+- url: /.*
+  script: auto
+  secure: always
+  redirect_http_response_code: 301
+
+env_variables:
+  NODE_ENV: production
+  CONFIG_ENV: development
+  ICD_APP_PORT: 8080
+  EXPIRE_TIME: 5
+  REMEMBER_LOGIN_EXPIRE_TIME: 720
+
+  # DEVELOPMENT
+  MYSQL_DB: nest-base
+  MYSQL_HOST: 127.0.0.1
+  MYSQL_PORT: 3306
+  MYSQL_USER: nest-base
+  MYSQL_PASSWORD: nest-base
+
+  # COMMON

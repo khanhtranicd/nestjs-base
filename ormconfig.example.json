@@ -1,0 +1,19 @@
+{
+  "type": "mysql",
+  "host": "",
+  "port": 0,
+  "username": "",
+  "password": "",
+  "database": "icd-internal-system",
+  "logging": true,
+  "entities": ["src/modules/database/**/*.entity{js,.ts}"],
+  "migrations": [
+    "src/modules/database/migrations/*{.ts,.js}"
+  ],
+  "migrationsTableName": "migrations",
+  "migrationsRun": true,
+  "cli": {
+    "migrationsDir": "src/modules/database/migrations"
+  },
+  "synchronize": true
+}

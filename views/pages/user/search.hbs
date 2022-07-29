@@ -1,0 +1,144 @@
+{{#> admin.layout title=title }}
+  {{#*inline "style"}}
+    <link rel="stylesheet" href="/dist/css/form.css">
+  {{/inline}}
+  {{#*inline "content"}}
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col d-flex justify-content-between align-items-center">
+            <h4 class="m-0 d-flex h4">
+              <ion-icon name="search-outline"></ion-icon>
+              <span class="ml-2">{{ title }}</span>
+            </h4>
+            {{#if isAllowCreated}}
+              <a href={{routes 'UserRegistration'}} class="btn btn-style-2 px-4">
+                <ion-icon name="person-add-outline" size="small"></ion-icon>
+                <span class="ml-2">{{ langCommon.btn.userRegistration }}</span>
+              </a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-primary p-4">
+          <form action={{routes 'UserList'}} method="GET">
+            <input hidden name="page" value="1" />
+            <div class="row search-form">
+              <div class="form-group col-5">
+                <label>{{ langCommon.label.name }}</label>
+                <input value="{{ query.name }}" type="search" class="form-control form-control-lg" name="name">
+              </div>
+              <div class="form-group col-5">
+                <label>{{ langCommon.label.authority }}</label>
+                <select class="form-control form-control-lg select2" name="authority">
+                  <option value="" selected>{{ langCommon.label.selectOne }}</option>
+                  {{#each roles}}
+                    <option value="{{ value }}">{{ name }}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-2">
+                <label>&nbsp;</label>
+                <button type="submit" class="btn btn-block btn-style-1"><ion-icon name="search-outline"></ion-icon> <span class="ml-2">{{ langCommon.btn.search }}</span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        {{#if users.length }}
+          <div class="card">
+            <div class="card-body">
+              <div class="pagination d-flex float-right">
+                <p>Pages:</p>
+                {{#if disabledPrev}}
+                  <a href="{{ firstPage.url }}" class="last btn p-0 disabled">First</a>
+                  <a href="{{ prevPage.url }}" class="next btn p-0 disabled">Prev</a>
+                {{else}}
+                  <a href="{{ firstPage.url }}" class="next">First</a>
+                  <a href="{{ prevPage.url }}" class="last">Prev</a>
+                {{/if}}
+                {{#each pagination}}
+                  {{#if active}}
+                    <p class="{{ active }}">{{ page }}</p>
+                  {{else}}
+                    <a href="{{ url }}">{{ page }}</a>
+                  {{/if}}
+                {{/each}}
+                {{#if disabledNext}}
+                  <a href="{{ nextPage.url }}" class="next btn p-0 disabled">Next</a>
+                  <a href="{{ lastPage.url }}" class="last btn p-0 disabled">Last</a>
+                {{else}}
+                  <a href="{{ nextPage.url }}" class="next">Next</a>
+                  <a href="{{ lastPage.url }}" class="last">Last</a>
+                {{/if}}
+                <p>{{ query.page }} of {{ totalPage }}</p>
+              </div>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>{{ langCommon.label.userId }}</th>
+                    <th>{{ langCommon.label.username }}</th>
+                    <th>{{ langCommon.label.authority }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {{#each users}}
+                  <tr>
+                    <td>
+                      <a class="color-primary text-bold" href="{{routes 'UserEdit'}}/{{ id }}">{{id}}</a>
+                    </td>
+                    <td>{{ seller.full_name }}</td>
+                    <td>{{ authorityTitle }}</td>
+                  </tr>
+                {{/each}}
+                </tbody>
+              </table>
+              <div class="pagination d-flex float-right">
+                <p>Pages:</p>
+                {{#if disabledPrev}}
+                  <a href="{{ firstPage.url }}" class="last btn p-0 disabled">First</a>
+                  <a href="{{ prevPage.url }}" class="next btn p-0 disabled">Prev</a>
+                {{else}}
+                  <a href="{{ firstPage.url }}" class="next">First</a>
+                  <a href="{{ prevPage.url }}" class="last">Prev</a>
+                {{/if}}
+                {{#each pagination}}
+                  {{#if active}}
+                    <p class="{{ active }}">{{ page }}</p>
+                  {{else}}
+                    <a href="{{ url }}">{{ page }}</a>
+                  {{/if}}
+                {{/each}}
+                {{#if disabledNext}}
+                  <a href="{{ nextPage.url }}" class="next btn p-0 disabled">Next</a>
+                  <a href="{{ lastPage.url }}" class="last btn p-0 disabled">Last</a>
+                {{else}}
+                  <a href="{{ nextPage.url }}" class="next">Next</a>
+                  <a href="{{ lastPage.url }}" class="last">Last</a>
+                {{/if}}
+                <p>{{ query.page }} of {{ totalPage }}</p>
+              </div>
+            </div>
+          </div>
+        {{else}}
+          {{#if emptyText }}
+            <div class="card">
+              <div class="card-body">
+                <p class="text-bold text-center mb-0">{{ emptyText }}</p>
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+    </section>
+  {{/inline}}
+  {{#*inline "script"}}
+    <script>
+      $(function () {
+        $('select[name=authority]').val("{{ query.authority }}").change();
+      });
+    </script>
+  {{/inline}}
+{{/admin.layout}}

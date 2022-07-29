@@ -1,0 +1,25 @@
+{
+  "validationMsg": {
+    "employee_id": {
+      "required": "Name is required"
+    },
+    "user_password": {
+      "required": "Password is required",
+      "invalid_format": "Use 8 or more characters with a mix of letters, numbers & symbols"
+    },
+    "authority": {
+      "required": "Authority is required"
+    }
+  },
+  "search": {
+    "title": "User list",
+    "emptyText": "User not found"
+  },
+  "registration": {
+    "title": "User registration",
+    "titleEditing": "User editing"
+  },
+  "editProfile": {
+    "title": "Account setting"
+  }
+}

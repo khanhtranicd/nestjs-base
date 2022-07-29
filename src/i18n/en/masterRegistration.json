@@ -1,0 +1,14 @@
+{
+  "title": "Master registration",
+  "master": {
+    "position": "Position management",
+    "bank": "Bank management"
+  },
+  "post": {
+    "title": "Title",
+    "description": "Description",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "status": "Status"
+  }
+}

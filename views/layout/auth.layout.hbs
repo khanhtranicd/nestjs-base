@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICDVN Internal System</title>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Play:wght@0,700&display=fallback">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/dist/css/login.css">
+  <link rel="icon" type="image/x-icon" href="/dist/img/logo.svg">
+  {{> style }}
+</head>
+<body class="hold-transition">
+{{> content }}
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="/dist/js/adminlte.js"></script>
+<script src="/dist/js/main.js"></script>
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+<script>
+  $(function () {
+    $('.select2').select2()
+  });
+</script>
+{{> script }}
+</body>
+</html>

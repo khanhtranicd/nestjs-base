@@ -1,0 +1,9 @@
+mysql:
+  image: mysql:5.6
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: nest-base
+    MYSQL_USER: nest-base
+    MYSQL_PASSWORD: nest-base
+    MYSQL_DATABASE: nest-base

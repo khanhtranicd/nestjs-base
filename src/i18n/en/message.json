@@ -1,0 +1,12 @@
+{
+  "common": {
+    "badRequest": "Bad Request",
+    "notFound": "Not Found",
+    "unauthorize": "Unauthorize",
+    "wrongIdFormat": "Wrong Id format"
+  },
+  "user": {
+    "userNotFound": "User with {email} does not exists",
+    "userAlreadyExists": "User with {email} already exists"
+  }
+}

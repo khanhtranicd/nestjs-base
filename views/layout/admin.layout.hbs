@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POD Platform</title>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Play:wght@0,700&display=fallback">
+  <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/dist/css/common.css">
+  <link rel="icon" type="image/x-icon" href="/dist/img/logo.svg">
+  {{> style }}
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="/dist/img/logo.svg" alt="podplatform" height="60" width="60">
+  </div>
+  {{> navbar breadcrumbs=breadcrumbs }}
+  {{> sidebar sidebar=langCommon.sidebar}}
+  <div class="content-wrapper">
+    {{> content }}
+  </div>
+  {{> modal title=modalWarning.title content=modalWarning.content type="warning" }}
+  {{> modal 
+    title=modalDanger.title 
+    content=modalDanger.content 
+    action=modalDanger.action 
+    method=modalDanger.method 
+    id=modalDanger.id 
+    btnCancel=modalDanger.btnCancel 
+    btnSubmit=modalDanger.btnSubmit 
+    type="danger" 
+  }}
+</div>
+{{> aside }}
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/moment/moment-with-locales.min.js"></script>
+<script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="/dist/js/adminlte.js"></script>
+<script src="/dist/js/main.js"></script>
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: "textarea.tiny-editor",
+    plugins: 'image code',
+    automatic_uploads: true,
+    file_picker_types: 'image',
+    language: "{{ currentUser.lang }}",
+    file_picker_callback: function (cb, value, meta) {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/*');
+      input.onchange = function () {
+        const file = this.files[0];
+        const reader = new FileReader();
+        reader.onload = function () {
+          const id = 'blobid' + (new Date()).getTime();
+          const blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+          const base64 = reader.result.split(',')[1];
+          const blobInfo = blobCache.create(id, file, base64);
+          blobCache.add(blobInfo);
+          cb(blobInfo.blobUri(), { title: file.name });
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    },
+  });
+</script>
+<script>
+  $(function () {
+    $(".select2").select2()
+  });
+
+  {{#if toast }}
+    $(document).Toasts("create", {
+      class: "{{ toast.class }}",
+      title: "{{ toast.title }}",
+      body: "{{ toast.content }}",
+      autohide: true,
+      delay: 3000,
+    })
+  {{/if}}
+
+  $(".toast-success").click(function() {
+    $(document).Toasts("create", {
+      class: "bg-success",
+      title: "{{ toastSuccess.title }}",
+      subtitle: "{{ toastSuccess.subTitle }}",
+      body: "{{ toastSuccess.content }}",
+      autohide: true,
+      delay: 3000,
+    })
+  });
+
+  $(".toast-warning").click(function() {
+    $(document).Toasts("create", {
+      class: "bg-warning",
+      title: "{{ toastWarning.title }}",
+      subtitle: "{{ toastWarning.subTitle }}",
+      body: "{{ toastWarning.content }}",
+      autohide: true,
+      delay: 3000,
+    })
+  });
+
+  $(".toast-danger").click(function() {
+    $(document).Toasts("create", {
+      class: "bg-danger",
+      title: "{{ toastDanger.title }}",
+      subtitle: "{{ toastDanger.subTitle }}",
+      body: "{{ toastDanger.content }}",
+      autohide: true,
+      delay: 3000,
+    })
+  });
+
+  var routesLevel = {{menu_routes_level}}
+  let pathName = window.location.pathname;
+  (pathName.length > 1) && pathName.slice(-1) === '/' && (pathName = pathName.slice(0, -1));
+  const currentPathElement = pathName.split('/');
+
+  function checkActiveMenu(menuItem) {
+    const currentRouteElement = pathName.split('/').filter(item => item);
+    if (pathName === menuItem) {
+      return true;
+    }
+
+    const childrenPaths = routesLevel.find(item => item.path === menuItem)?.children;
+    if (!childrenPaths) {
+      return false;
+    }
+
+    if (childrenPaths.map(children => children.path).includes(pathName)) {
+      return true;
+    }
+
+    return childrenPaths.find(item => {
+      let itemPath = (item.path || '');
+      if (itemPath.includes(':id') && Number(currentPathElement.at(-1))) {
+        itemPath = itemPath.replace(':id', currentPathElement.at(-1));
+      }
+
+      const splitChildrenPath = itemPath.split('/');
+
+      return splitChildrenPath.join('/') === currentPathElement.join('/');
+    });
+  }
+
+  $('.nav-sidebar .nav-item a').each(function() {
+    const menuItemPath = $(this).attr('href');
+    if (checkActiveMenu(menuItemPath)) {
+      $(this).addClass('active');
+    }
+    if ((menuItemPath === "/" && pathName.includes("/information")) || (menuItemPath === "/" && pathName === "/")) {
+      $(this).parent().addClass('menu-open');
+    }
+  })
+</script>
+{{> script }}
+</body>
+</html>

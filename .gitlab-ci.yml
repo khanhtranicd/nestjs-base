@@ -1,0 +1,36 @@
+stages:
+  - build
+  - deploy
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_REF_NAME == "integrate"'
+
+# Defined variable for config all app
+.global_config: &global_config
+  variables:
+    FORCE_COLOR: 1
+  cache:
+    untracked: true
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+
+# Defined variable for deploy
+.build_script: &build_script
+  script:
+    - ". ~/.nvm/nvm.sh"
+    - nvm install "$NODE_VERSION"
+    - nvm use "$NODE_VERSION"
+    - npm install
+    - echo "Running check format"
+    - npm run check-format
+    - echo "Running test function"
+    - npm run test
+
+## Deploy effected to production stage
+build:
+  <<: *global_config
+  stage: build
+  <<: *build_script

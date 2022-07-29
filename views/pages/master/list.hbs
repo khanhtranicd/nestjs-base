@@ -1,0 +1,141 @@
+{{#> admin.layout title=langCommon.title }}
+  {{#*inline "style"}}
+    <link href="/dist/css/bootstrap-editable.css" rel="stylesheet"/>
+    <style>
+      .action__edit {
+        color: var(--primary);
+      }
+
+      .action__delete {
+        color: red;
+        padding-left: 10px;
+      }
+
+      .editable-submit {
+        background-color: var(--primary) !important;
+      }
+
+      .remove-item {
+        cursor: pointer;
+      }
+
+      .empty-data {
+        text-align: center;
+        color: red;
+      }
+    </style>
+  {{/inline}}
+  {{#*inline "content"}}
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col d-flex justify-content-between align-items-center">
+            <h4 class="m-0 d-flex h4">
+              <ion-icon src="{{iconSrc}}"></ion-icon>
+              <span class="ml-2">{{ langCommon.title }}</span>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card">
+            <div id="table-list" class="card-body">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>{{ langCommon.btn.orderNumber }}</th>
+                    <th>{{ langCommon.contentColumnTitle }}</th>
+                    <th>{{ langCommon.btn.delete}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each data}}
+                    <tr>
+                      <td class="text-bold col-no"></td>
+                      <td><a href="#" data-pk="{{id}}">{{ title }}</a></td>
+                      <td>
+                        <span class="remove-item" onclick="removeItem(this, {{id}})"><ion-icon class="action__delete" name="trash-outline" size="small" ></ion-icon></span>
+                      </td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+                <tfoot>
+                  {{#if isEmptyData }}
+                    <tr>
+                      <td colspan="3" class="empty-data">{{ emptyText }}</td>
+                    </tr>
+                  {{else}}
+                    <td colspan="3">
+                      <button class="btn btn-style-2 px-4 new-record">
+                        <ion-icon name="add-circle-outline" size="small"></ion-icon>
+                        <span class="ml-2">{{ langCommon.btn.addNew }}</span>
+                      </button>
+                    </td>
+                  {{/if}}
+                </tfoot>
+              </table>
+            </div>
+          </div>
+      </div>
+    </section>
+  {{/inline}}
+  {{#*inline "script"}}
+    <script src="/dist/js/bootstrap-editable.min.js"></script>
+    <script>
+      {{!-- Use to handle editable for list --}}
+      let listIndex = 0;
+      $('#table-list a').editable({
+        type: 'text',
+        name: 'name',
+        url: '/post',
+      });
+
+      const tableId = $('#table-list');
+      $('.new-record').on('click', () => {
+        tableId.find('table tbody').append(`
+          <tr>
+            <td class="text-bold col-no">${getOrderNumberByIndex(listIndex)}</td>
+            <td><a href="#" data-pk="1" data-type="text"></a></td>
+            <td>
+              <span class="remove-item" onclick="removeItem(this, '')">
+                <ion-icon class="action__delete" name="trash-outline" size="small" ></ion-icon>
+              </span>
+            </td>
+          </tr>
+        `);
+        listIndex ++;
+
+        const lastItem = tableId.find('tbody tr').last();
+        $(lastItem).find('td a').editable({
+          type: 'text',
+          name: 'name',
+          url: '/post',
+          emptytext: 'enter name',
+        });
+      });
+
+      {{!-- Ajax to remove data --}}
+      function removeItem(el, id) {
+        $(el).parent().parent().remove();
+        updateListNo();
+      }
+
+      function updateListNo() {
+        listIndex = 0;
+        tableId.find('.col-no').each(function(index, element) {
+          $(element).text(getOrderNumberByIndex(index));
+          listIndex ++;
+        });
+      }
+
+      function getOrderNumberByIndex(indexInArr) {
+        const noStr = (indexInArr + 1).toString();
+        return noStr.length <= 1 ? `0${noStr}` : noStr;
+      }
+
+      updateListNo();
+    </script>
+  {{/inline}}
+{{/admin.layout}}

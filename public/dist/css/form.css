@@ -1,0 +1,30 @@
+#employee_registration .input-group-text i {
+    margin: 0 auto;
+    color: #ed960b;
+}
+
+#employee_registration .input-group-text {
+    width: 50px;
+    background-color: #f3f3f3;
+}
+
+.input-group-text ion-icon {
+    color: #ed960b;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #333;
+}
+
+.title-form-lang {
+    border-left: 5px solid #ee960a;
+    line-height: 18px;
+}
