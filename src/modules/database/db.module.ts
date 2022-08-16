@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 import { config } from './config';
-import { SellerSubscriber } from './subscribers/employee.subscriber';
 
 const connectionConfig: MysqlConnectionOptions = {
   type: 'mysql',
@@ -14,7 +13,7 @@ const connectionConfig: MysqlConnectionOptions = {
   extra: config.CLOUD_SQL_INSTANT_NAME ? { socketPath: config.CLOUD_SQL_INSTANT_NAME } : null,
   synchronize: true,
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  subscribers: [SellerSubscriber],
+  subscribers: [],
 };
 
 @Module({

@@ -11,21 +11,18 @@ export class AuthService {
   async validateUser(payload): Promise<any> {
     const { username, password } = payload;
     const user = await this.userService.findOne({
-      relations: ['seller'],
       where: {
-        seller: {
-          email: username,
-          delete_flg: 0,
-        },
+        email: username,
+        delete_flg: 0,
       },
     });
     if (!user) {
       return null;
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.user_password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
     if (passwordMatch) {
-      const { user_password, ...result } = user;
+      const { password, ...result } = user;
       return result;
     }
     return null;
@@ -33,7 +30,7 @@ export class AuthService {
 
   async login(user: any) {
     if (!user) return null;
-    const payload = { username: user.seller.email, user_id: user.seller.id };
+    const payload = { email: user.email };
     return {
       login: true,
       access_token: this.jwtService.sign(payload),

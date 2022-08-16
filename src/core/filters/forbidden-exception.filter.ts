@@ -1,4 +1,3 @@
-import { ROUTES } from '@shared/common/constants';
 import { ExceptionFilter, Catch, ArgumentsHost, ForbiddenException } from '@nestjs/common';
 import { Response } from 'express';
 
@@ -9,6 +8,6 @@ export class ForbiddenExceptionFilter implements ExceptionFilter {
     const res = ctx.getResponse<Response>();
     const status = exception.getStatus();
 
-    res.status(status).redirect(ROUTES.Login);
+    res.status(status).send({ error: 'ForbiddenException' });
   }
 }

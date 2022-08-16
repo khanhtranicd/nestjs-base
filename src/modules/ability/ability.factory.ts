@@ -2,7 +2,6 @@ import UserEntity from '@modules/database/entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { InferSubjects, Ability, AbilityBuilder, AbilityClass, ExtractSubjectType } from '@casl/ability';
 import { AUTHORITY } from '@shared/common/constants';
-import SellerEntity from '@modules/database/entities/seller.entity';
 
 export enum Action {
   Manage = 'manage',
@@ -12,7 +11,7 @@ export enum Action {
   Delete = 'delete',
 }
 
-export type Subjects = InferSubjects<typeof UserEntity> | InferSubjects<typeof SellerEntity> | 'all';
+export type Subjects = InferSubjects<typeof UserEntity> | 'all';
 
 export type AppAbility = Ability<[Action, Subjects]>;
 

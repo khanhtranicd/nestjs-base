@@ -1,4 +1,4 @@
-import { POSITION, AUTHORITY, MENU_ROUTES_LEVEL } from '@shared/common/constants';
+import { AUTHORITY } from '@shared/common/constants';
 import { HttpStatus } from '@nestjs/common';
 import { LOCALES } from './../common/constants';
 import { LoggerService } from '@modules/logger/logger.service';
@@ -56,41 +56,6 @@ export class BaseController {
     return name;
   }
 
-  public getBreadcrumbs(breadcrumbsInfo = []) {
-    const breadcrumbs = [
-      {
-        title: 'Home',
-        path: '/',
-        isLast: !breadcrumbsInfo.length,
-      },
-    ];
-
-    breadcrumbsInfo.forEach((info, index) => {
-      breadcrumbs.push({
-        title: info.title,
-        path: info.path,
-        isLast: index + 1 === breadcrumbsInfo.length,
-      });
-    });
-
-    return breadcrumbs;
-  }
-
-  public getMenuParentPath(currentPath: string, pathParamValue: string = ''): string {
-    const parentMenuItem = MENU_ROUTES_LEVEL.find((item) => {
-      return item.children.filter((children) => {
-        const childrenPath: string = children.path.replace(':id', pathParamValue);
-        return childrenPath === currentPath;
-      }).length;
-    });
-
-    if (!parentMenuItem) {
-      return '';
-    }
-
-    return parentMenuItem.path;
-  }
-
   public translate(subject: string, lang: string) {
     return this.i18n.translate(subject, { lang });
   }
@@ -110,10 +75,6 @@ export class BaseController {
   public async getGenderText(genderEnum: number, lang: string) {
     const gender = await this.getGender(lang);
     return gender[genderEnum] || '';
-  }
-
-  public getPositionText(positionEnum: number) {
-    return POSITION[positionEnum] || '';
   }
 
   public mergeLangObjects(...args) {

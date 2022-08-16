@@ -8,15 +8,12 @@ import { join } from 'path';
 import { AutomapperModule } from '@automapper/nestjs';
 import { classes } from '@automapper/classes';
 import { CamelCaseNamingConvention, SnakeCaseNamingConvention } from '@automapper/core';
-import { SellerModule } from './modules/seller/seller.module';
 import { AppController } from './app.controller';
 import { MailModule } from './modules/mailer/mail.module';
 import { ErrorModule } from '@modules/error/error.module';
 import { AbilityModule } from './modules/ability/ability.module';
 import { LoggerService } from './modules/logger/logger.service';
 import { LoggerModule } from './modules/logger/logger.module';
-import { MasterModule } from './modules/master/master.module';
-import { StoreModule } from './modules/store/store.module';
 
 @Module({
   imports: [
@@ -43,13 +40,10 @@ import { StoreModule } from './modules/store/store.module';
         },
       ],
     }),
-    SellerModule,
     MailModule,
     ErrorModule,
     AbilityModule,
     LoggerModule,
-    MasterModule,
-    StoreModule,
   ],
   controllers: [AppController],
   providers: [LoggerService],

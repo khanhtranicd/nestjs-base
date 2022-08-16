@@ -1,8 +1,0 @@
-.search-form .form-group {
-    width: calc((100% - 190px) / 2);
-    margin-right: 10px;
-}
-
-.search-form .form-group:last-child {
-    width: 160px;
-}
